@@ -13,7 +13,9 @@ import {BlockchainService} from '../shared/blockchain.service';
   providers: [ BlockchainService ]
 })
 export class GetTicketComponent implements OnInit, OnDestroy {
+
   id: number;
+  journeyID: string;
   private sub: any;
   pathImage: string;
   ticks = 0;
@@ -21,6 +23,7 @@ export class GetTicketComponent implements OnInit, OnDestroy {
   hour = 0;
   boolTicket = false;
   body: any;
+  foobar: any;
 
   counter = 0;
   timerId: string;
@@ -58,10 +61,49 @@ export class GetTicketComponent implements OnInit, OnDestroy {
     this.hour = 0;
     this.minutes = 0;
     if (this.boolTicket === true) {
+      this.endJourney();
       this.boolTicket = false;
     }else {
+      this.startBooking();
       this.boolTicket = true;
     }
+  }
+
+  startTrans(body: any): void {
+    this.blockChainService.startBooking(this.body).subscribe(
+      data => {
+        this.blockChainService.getJourneyID(data.transactionId).subscribe(
+          data => {
+            this.journeyID = this.getJourneyID(data.eventsEmitted[0].journey);
+            this.foobar = {
+              '$class': 'org.example.biznet.EndBooking',
+              'journey': this.journeyID,
+              'timestamp': '2017-11-25T12:33:38.593Z'
+            }
+            console.log("Start of booking",data);
+          }
+        );
+      }
+    );
+  }
+
+  endJourney(): void {
+    this.blockChainService.endJourney(this.foobar).subscribe(
+      data => {
+        console.log("End of booking:",data);
+      }
+    );
+  }
+
+  getJourneyID(jsonObj): any {
+    // tslint:disable-next-line:prefer-const
+    let stringOb = JSON.stringify(jsonObj);
+    // tslint:disable-next-line:prefer-const
+    let start = stringOb.indexOf('JOURNEY');
+    // tslint:disable-next-line:prefer-const
+    let end = stringOb.indexOf('"', start);
+    const journey = stringOb.slice(start, end);
+    return journey;
   }
 
   startBooking(): void {
@@ -70,40 +112,40 @@ export class GetTicketComponent implements OnInit, OnDestroy {
           this.body = {
             '$class': 'org.example.biznet.StartBooking',
             'user': 'Elena',
-            'mode': 'drivenow',
+            'mode': 'mvg',
             'timestamp': '2017-11-25T10:54:29.858Z'
           };
-          this.blockChainService.startBooking(this.body);
+          this.startTrans(this.body);
          break;
       }
       case 2: {
         this.body = {
           '$class': 'org.example.biznet.StartBooking',
           'user': 'Elena',
-          'mode': 'drivenow',
+          'mode': 'car2go',
           'timestamp': '2017-11-25T10:54:29.858Z',
         };
-        this.blockChainService.startBooking(this.body);
+        this.startTrans(this.body);
        break;
     }
     case 3: {
       this.body = {
         '$class': 'org.example.biznet.StartBooking',
         'user': 'Elena',
-        'mode': 'drivenow',
+        'mode': 'db',
         'timestamp': '2017-11-25T10:54:29.858Z',
       };
-      this.blockChainService.startBooking(this.body);
+      this.startTrans(this.body);
      break;
   }
   case 4: {
     this.body = {
       '$class': 'org.example.biznet.StartBooking',
       'user': 'Elena',
-      'mode': 'drivenow',
+      'mode': 'flinkster',
       'timestamp': '2017-11-25T10:54:29.858Z',
     };
-    this.blockChainService.startBooking(this.body);
+    this.startTrans(this.body);
    break;
 }
 case 5: {
@@ -113,17 +155,17 @@ case 5: {
     'mode': 'drivenow',
     'timestamp': '2017-11-25T10:54:29.858Z',
   };
-  this.blockChainService.startBooking(this.body);
+  this.startTrans(this.body);
  break;
 }
 case 6: {
   this.body = {
     '$class': 'org.example.biznet.StartBooking',
     'user': 'Elena',
-    'mode': 'drivenow',
+    'mode': 'mvgrad',
     'timestamp': '2017-11-25T10:54:29.858Z',
   };
-  this.blockChainService.startBooking(this.body);
+  this.startTrans(this.body);
  break;
 }
       default: {

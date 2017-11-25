@@ -1,4 +1,4 @@
-<div fxLayout="row" ffxLayoutAlign="space-around center" fxLayoutWrap fxLayoutGap="2rem">
+<div fxLayout="row" ffxLayoutAlign="center center" fxLayoutWrap fxLayoutGap="2rem" >
   <div *ngFor="let item of myServices">
   <mat-card class="example-card " routerLink="getticket/{{item.id}}">
     <mat-card-header>
@@ -14,5 +14,6 @@
     <mat-card-actions>
     </mat-card-actions>
   </mat-card>
+  <br>
 </div>
   </div>

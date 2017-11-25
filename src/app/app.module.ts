@@ -3,7 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatCardModule, MatButtonModule, MatIconRegistry} from '@angular/material';
+import {MatCardModule, MatButtonModule, MatIconRegistry, MatTabsModule} from '@angular/material';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { ServicelistComponent } from './servicelist/servicelist.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,7 +30,8 @@ import {MatIconModule} from '@angular/material/icon';
     FlexLayoutModule,
     MatIconModule,
     MatFormFieldModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule
   ],
   providers: [SimpleTimer, MatIconRegistry, HttpClientModule],
   bootstrap: [AppComponent],

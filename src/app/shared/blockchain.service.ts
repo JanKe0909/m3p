@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class BlockchainService {
   private startBookingUrl = 'http://localhost:3000/api/StartBooking';
-  private allTraderUrl = 'http://localhost:3000/api/Trader';
-  private historicUrl = 'http://localhost:3000/api//system/historian';
+  private journeyIDUrl = 'http://localhost:3000/api/system/historian/';
+  private endJourneyUrl = 'http://localhost:3000/api/EndBooking';
 
   // tslint:disable-next-line:prefer-const
    trans = {
@@ -15,23 +15,22 @@ export class BlockchainService {
     'mode': 'drivenow',
     'timestamp': '2017-11-25T10:54:29.858Z'
   };
+
+
   constructor(private httpClient: HttpClient) { }
 
 
-
-
   startBooking(body: any): Observable <any> {
-    return this.httpClient.post(this.startBookingUrl, this.trans);
+    return this.httpClient.post(this.startBookingUrl, body);
   }
 
 
-  getAllTraders(): Observable <any> {
-    return this.httpClient.get(this.allTraderUrl);
-
+  getJourneyID(transactionID: any): Observable <any> {
+    return this.httpClient.get(this.journeyIDUrl + transactionID);
   }
 
-  getHistoric(): Observable <any> {
-    return this.httpClient.get(this.historicUrl);
+  endJourney(body: any): Observable <any> {
+    return this.httpClient.post(this.endJourneyUrl, body);
 
   }
 

@@ -5,19 +5,21 @@
     </mat-card-header>
     <div *ngIf="!boolTicket">
     <img mat-card-image src="{{pathImage}}">
+  
+
   </div>
     <div *ngIf="boolTicket">
     <img mat-card-image src="./assets/images/qr.jpg">
   </div>
     <div *ngIf="boolTicket" class="timer">00h:{{minutes}}m:{{counter}}sec</div>
     <mat-card-actions>
-      1
+        <div *ngIf="!boolTicket">
+            <button mat-button (click)="getYourTicket()">Reise starten</button>
+            </div>
+            <div *ngIf="boolTicket">
+                <button mat-button (click)="getYourTicket()">Reise beenden</button>
+            </div>
     </mat-card-actions>
   </mat-card>
 </div>
-<div *ngIf="!boolTicket">
-<button mat-button (click)="getYourTicket()">Reise starten</button>
-</div>
-<div *ngIf="boolTicket">
-    <button mat-button (click)="getYourTicket()">Reise beenden</button>
-</div>
+
