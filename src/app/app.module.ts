@@ -14,12 +14,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 import {MatIconModule} from '@angular/material/icon';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ServicelistComponent,
-    GetTicketComponent
+    GetTicketComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import {Observable} from 'rxjs/Rx';
 import {SimpleTimer} from 'ng2-simple-timer';
 import {BlockchainService} from '../shared/blockchain.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-get-ticket',
@@ -30,7 +31,9 @@ export class GetTicketComponent implements OnInit, OnDestroy {
 
   constructor(  private route: ActivatedRoute,
                 private st: SimpleTimer,
-                private blockChainService: BlockchainService ) { }
+                private blockChainService: BlockchainService,
+                private _location: Location
+               ) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -54,6 +57,10 @@ export class GetTicketComponent implements OnInit, OnDestroy {
     }else if (this.minutes === 60) {
       this.hour++;
     }
+  }
+
+  goBack(): void {
+    this._location.back();
   }
 
   getYourTicket(): void {

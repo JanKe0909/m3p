@@ -1,4 +1,10 @@
+<mat-icon>fast_rewind</mat-icon>
+<button mat-button (click)="goBack()">Zurück</button>
+<br>
+
+
 <div fxLayout="row" fxLayoutAlign="center center">
+
 
 <mat-card class="example-card">
     <mat-card-header>
@@ -11,15 +17,16 @@
     <div *ngIf="boolTicket">
     <img mat-card-image src="./assets/images/qr.jpg">
   </div>
-    <div *ngIf="boolTicket" class="timer">00h:{{minutes}}m:{{counter}}sec</div>
+    <div *ngIf="boolTicket" class="timer"> 00h:{{minutes}}m:{{counter}}sec</div>
     <mat-card-actions>
         <div *ngIf="!boolTicket">
+            <mat-icon>play_arrow</mat-icon>
             <button mat-button (click)="getYourTicket()">Reise starten</button>
             </div>
             <div *ngIf="boolTicket">
+                <mat-icon>schedule</mat-icon>
                 <button mat-button (click)="getYourTicket()">Reise beenden</button>
             </div>
     </mat-card-actions>
   </mat-card>
 </div>
-
