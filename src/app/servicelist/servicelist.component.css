@@ -1,0 +1,6 @@
+.example-card {
+    width: 250px;
+    min-height: 430px;
+  }
+  
+.example-card:hover { background-color: #eaf2e8 }

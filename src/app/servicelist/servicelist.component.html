@@ -1,0 +1,18 @@
+<div fxLayout="row" ffxLayoutAlign="space-around center" fxLayoutWrap fxLayoutGap="2rem">
+  <div *ngFor="let item of myServices">
+  <mat-card class="example-card " routerLink="getticket/{{item.id}}">
+    <mat-card-header>
+      <mat-card-title>{{item.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{item.imagePath}}">
+    <mat-card-content>
+        <mat-icon svgIcon="thumbs-up"></mat-icon>
+      <p>
+        {{item.description}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+</div>
+  </div>
